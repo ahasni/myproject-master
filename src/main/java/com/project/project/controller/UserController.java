@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping("/users")
     public List <User> getAllUsers(){
-        return userRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
     @GetMapping("/user/{idUser}")
     public User getUser (@PathVariable long idUser) {

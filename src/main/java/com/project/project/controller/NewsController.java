@@ -12,10 +12,11 @@ import java.util.Optional;
 @RestController
 public class NewsController {
     @Autowired
+    NewsRepository newsRepository;
 
     @GetMapping("/news")
     public List<News> retrieveAllNews() {
-        return newsRepository.findAll();
+        return (List<News>) newsRepository.findAll();
     }
 
     @GetMapping("/news/{idNews")

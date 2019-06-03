@@ -9,15 +9,19 @@ import java.util.Date;
 @Entity
 @Table(name = "feedback")
 public class Feedback {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idFeedback;
+
     @NotNull
     @Column(name = "feedbackobject")
     private String feedbackObject;
+
     @NotNull
     @Column(name = "feedbackdescription")
     private String feedbackDescription;
+
     @Column(name = "feedbackdate")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyy")
@@ -26,6 +30,7 @@ public class Feedback {
     @OneToOne(fetch = FetchType.LAZY,optional = false )
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
+
     @OneToMany(fetch = FetchType.LAZY )
     @JoinColumn(name = "idResponse", nullable = false)
     private Response response;
