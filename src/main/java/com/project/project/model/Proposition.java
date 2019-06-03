@@ -17,9 +17,10 @@ public class Proposition {
     @Column(name = "count")
     private int count;
 
-    @OneToOne(fetch = FetchType.LAZY,optional = false )
+    @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "idSurvey", nullable = false)
     private Survey survey;
+
 
     protected Proposition (){}
 

@@ -12,7 +12,6 @@ import java.util.Optional;
 @RestController
 public class NewsController {
     @Autowired
-    private NewsRepository newsRepository;
 
     @GetMapping("/news")
     public List<News> retrieveAllNews() {

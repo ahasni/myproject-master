@@ -3,6 +3,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -49,6 +51,25 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "gender",length = 10)
     private Gender gender;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idRole", nullable = false)
+    private Type_Role type_role;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "Admin")
+    private Set<Admin> statt = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "Feedback")
+    private Set<Feedback> stat= new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "Document")
+    private Set<Document> stattt = new HashSet<>();
 
     public User(Long idUser, Gender gender, Long phoneNumber, String photo, String password, String email, String firstName, String lastName, String address) {}
 

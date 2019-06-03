@@ -2,6 +2,8 @@ package com.project.project.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "attachment")
@@ -13,6 +15,16 @@ public class Attachment {
     @Column(name = "attachmenturl")
     private String attachmentURL;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "Attachment")
+    private Set<News> statt = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "Attachment")
+    private Set<Request> getStattt = new HashSet<>();
+
     protected Attachment(){}
 
     public Attachment(@NotNull String attachmentURL) {
@@ -21,10 +33,6 @@ public class Attachment {
 
     public Long getIdAttachment() {
         return idAttachment;
-    }
-
-    public void setIdAttachment(Long idAttachment) {
-        this.idAttachment = idAttachment;
     }
 
     public String getAttachmentURL() {

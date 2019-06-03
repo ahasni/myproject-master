@@ -27,10 +27,14 @@ public class Request {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyy")
     private Date finishDate;
+
     @OneToMany(fetch = FetchType.LAZY,orphanRemoval = true)
     @JoinColumn(name = "idAttachment", nullable = false)
     private Attachment attachment;
     protected Request () {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idResponse", nullable = false)
+    private Response response;
 
     public Request(String requestObject, Date startDate, Date finishDate) {
         this.requestObject = requestObject;

@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public List <User> getAllUsers(){
         return userRepository.findAll();
     }
@@ -37,6 +37,7 @@ public class UserController {
          user.getPhoto(),user.getPassword(),user.getEmail(),user.getFirstName(),user.getLastName(),user.getAddress()));
       return _user;
     }
+
 @PutMapping("/user/{idUser}")
     public ResponseEntity<User> updateUser (@PathVariable("id") long idUser, @RequestBody User user) {
     Optional<User> userData = userRepository.findById(idUser);

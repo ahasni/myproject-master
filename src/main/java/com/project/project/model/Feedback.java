@@ -22,9 +22,13 @@ public class Feedback {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyy")
     private Date feedbackDate;
+
     @OneToOne(fetch = FetchType.LAZY,optional = false )
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
+    @OneToMany(fetch = FetchType.LAZY )
+    @JoinColumn(name = "idResponse", nullable = false)
+    private Response response;
 
     protected Feedback () { }
 

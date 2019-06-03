@@ -1,9 +1,9 @@
 package com.project.project.repository;
 
 import com.project.project.model.Feedback;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 
 @Repository
-public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
+public interface FeedbackRepository extends CrudRepository<Feedback, Long> {
 }

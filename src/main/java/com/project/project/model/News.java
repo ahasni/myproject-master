@@ -27,7 +27,12 @@ public class News {
     @JoinColumn(name = "idAttachment", nullable = false)
     private Attachment attachment;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idAdmin", nullable = false)
+    private Admin admin;
+
     protected News (){}
+
 
     public News(@NotNull String title, @NotNull String newsDescription, Date publishingDate) {
         this.title = title;

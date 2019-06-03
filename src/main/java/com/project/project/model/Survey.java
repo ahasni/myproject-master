@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "survey")
@@ -22,9 +24,17 @@ public class Survey {
     @Column(name = "question")
     @Size(max = 300)
     private String question;
-    @OneToOne(fetch = FetchType.LAZY,optional = false )
+
+    @OneToMany(fetch = FetchType.LAZY )
     @JoinColumn(name = "idUser", nullable = false)
     private  Admin admin;
+
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "Survey")
+    private Set<Proposition> statt = new HashSet<>();
+
     protected Survey () {}
 
     public Survey(Date creationDate, Date closingDate, String question) {
