@@ -1,4 +1,4 @@
-package com.project.project.controller;
+/*package com.project.project.controller;
 import com.project.project.model.News;
 import com.project.project.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,3 +49,4 @@ public class NewsController {
     }
 
 
+*/

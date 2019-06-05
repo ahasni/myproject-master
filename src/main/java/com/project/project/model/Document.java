@@ -1,4 +1,4 @@
-package com.project.project.model;
+/*package com.project.project.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ public class Document {
     @OneToOne(fetch = FetchType.LAZY,optional = false )
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
-    
+
     protected Document(){}
 
     public Document(@NotNull String documentURL, @NotNull String documentType) {
@@ -60,3 +60,4 @@ public class Document {
             '}';
     }
 }
+*/

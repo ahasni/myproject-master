@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -22,7 +23,8 @@ public class UserController {
     public List <User> getAllUsers(){
         return (List<User>) userRepository.findAll();
     }
-    @GetMapping("/user/{idUser}")
+
+    /*@GetMapping("/user/{idUser}")
     public User getUser (@PathVariable long idUser) {
         Optional<User> user = userRepository.findById(idUser);
         return user.get();
@@ -38,17 +40,17 @@ public class UserController {
       return _user;
     }
 
-@PutMapping("/user/{idUser}")
-    public ResponseEntity<User> updateUser (@PathVariable("id") long idUser, @RequestBody User user) {
-    Optional<User> userData = userRepository.findById(idUser);
-    User _user = userData.get();
-    _user.setAddress(user.getAddress());
-    _user.setEmail(user.getEmail());
-    _user.setFirstName(user.getFirstName());
-    _user.setLastName(user.getLastName());
-    _user.setGender(user.getGender());
-    _user.setPassword(user.getPassword());
-    _user.setPhoto(user.getPhoto());
-    _user.setPhoneNumber(user.getPhoneNumber());
-    return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);
-}}
+    @PutMapping("/user/{idUser}")
+        public ResponseEntity<User> updateUser (@PathVariable("id") long idUser, @RequestBody User user) {
+        Optional<User> userData = userRepository.findById(idUser);
+        User _user = userData.get();
+        _user.setAddress(user.getAddress());
+        _user.setEmail(user.getEmail());
+        _user.setFirstName(user.getFirstName());
+        _user.setLastName(user.getLastName());
+        _user.setGender(user.getGender());
+        _user.setPassword(user.getPassword());
+        _user.setPhoto(user.getPhoto());
+        _user.setPhoneNumber(user.getPhoneNumber());
+        return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);*/
+}

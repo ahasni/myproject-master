@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,10 +53,14 @@ public class User {
     private Gender gender;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idRole", nullable = false)
+    @JoinColumn(
+        name="idRole",
+        referencedColumnName = "idRole",
+        insertable = false,
+        updatable = false)
     private Type_Role type_role;
 
-    @OneToMany(cascade = CascadeType.ALL,
+    /*@OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "Admin")
     private Set<Admin> statt = new HashSet<>();
@@ -69,7 +73,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "Document")
-    private Set<Document> stattt = new HashSet<>();
+    private Set<Document> stattt = new HashSet<>();*/
 
     public User(Long idUser, Gender gender, Long phoneNumber, String photo, String password, String email, String firstName, String lastName, String address) {}
 

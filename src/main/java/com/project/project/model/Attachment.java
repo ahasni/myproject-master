@@ -1,4 +1,4 @@
-package com.project.project.model;
+/*package com.project.project.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -51,3 +51,4 @@ public class Attachment {
             '}';
     }
 }
+*/

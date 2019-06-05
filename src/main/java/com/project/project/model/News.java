@@ -1,4 +1,4 @@
-package com.project.project.model;
+/*package com.project.project.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -82,3 +82,4 @@ public class News {
             '}';
     }
 }
+*/
