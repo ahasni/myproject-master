@@ -5,14 +5,18 @@ import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Admin {
+
+@Entity
+@Table(name = "admin", schema = "contactcenter")
+public class Admin implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idAdmin;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_admin", nullable=false, updatable=false)
+    private int id_admin;
     @NotNull
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idUser", nullable = false)
+    @JoinColumn(name = "id_user", nullable = false)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL,
@@ -30,7 +34,7 @@ public class Admin {
     @Override
     public String toString() {
         return "Attachment{" +
-                "idAttachment=" + idAdmin +
+                "id_attachment=" + id_admin +
                 '}';
     }
 }

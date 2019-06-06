@@ -2,61 +2,62 @@ package com.project.project.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "TYPE_ROLE")
-public class Type_Role {
+public class Type_Role implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idRole;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_role", nullable=false, updatable=false)
+    private int id_role;
 
     @NotNull
-    @Column(name = "roleName")
-    private String roleName;
+    @Column(name = "role_name")
+    private String role_name;
 
+    protected Type_Role() {}
+/*
     @OneToMany(
         targetEntity=User.class,
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         mappedBy = "type_role")
-    private Set<User> users = new HashSet<>();
+    private Set<User> users = new HashSet<>();*/
 
-    Type_Role(String roleName){
-        this.roleName = roleName;
+    public Type_Role(String roleName){
+        this.role_name = role_name;
     }
 
-    public Long getIdRole() {
-        return idRole;
+    public int getIdRole() {
+        return id_role;
     }
 
-    public void setIdRole(Long idRole) {
-        this.idRole = idRole;
+    public void setIdRole(int id_role) {
+        this.id_role = id_role;
     }
 
     public String getRoleName() {
-        return roleName;
+        return role_name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRoleName(String role_name) {
+        this.role_name = role_name;
     }
 
-
+    /*
     public Set<User> getUsersForRole() {
         return users;
     }
 
     public void setUsersForRole(Set<User> users) {
         this.users = users;
-    }
+    }*/
 
     @Override
     public String toString() {
         return "Type_Role{" +
-                "idRole=" + idRole +
-                ", roleName=" + roleName +
+                "id_role=" + id_role +
+                ", role_name=" + role_name +
                  '\'' +
                 '}';
     }

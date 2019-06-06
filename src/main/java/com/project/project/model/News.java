@@ -1,4 +1,4 @@
-/*package com.project.project.model;
+/* package com.project.project.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,28 +7,29 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "news")
-public class News {
+@Table(name = "news", schema = "contactcenter")
+public class News implements Serializable {
     @Id
-    @GeneratedValue
-    private Long idNews;
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_news", nullable=false, updatable=false)
+    private int id_news;
     @NotNull
     @Column(name = "title")
     private String title;
     @NotNull
-    @Column(name = "newsdescription")
-    private String newsDescription;
-    @Column(name = "publishingdate")
+    @Column(name = "news_description")
+    private String news_description;
+    @Column(name = "publishing_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "DD-MM-YYYY")
-    private Date publishingDate;
+    private Date publishing_date;
 
     @OneToOne(fetch = FetchType.LAZY,optional = false )
-    @JoinColumn(name = "idAttachment", nullable = false)
+    @JoinColumn(name = "id_attachment", nullable = false)
     private Attachment attachment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idAdmin", nullable = false)
+    @JoinColumn(name = "id_admin", nullable = false)
     private Admin admin;
 
     protected News (){}
@@ -36,16 +37,16 @@ public class News {
 
     public News(@NotNull String title, @NotNull String newsDescription, Date publishingDate) {
         this.title = title;
-        this.newsDescription = newsDescription;
-        this.publishingDate = publishingDate;
+        this.news_description = news_description;
+        this.publishing_date = publishing_date;
     }
 
-    public Long getIdNews() {
-        return idNews;
+    public int getIdNews() {
+        return id_news;
     }
 
-    public void setIdNews(Long idNews) {
-        this.idNews = idNews;
+    public void setIdNews(int id_news) {
+        this.id_news = id_news;
     }
 
     public String getTitle() {
@@ -57,29 +58,29 @@ public class News {
     }
 
     public String getNewsDescription() {
-        return newsDescription;
+        return news_description;
     }
 
-    public void setNewsDescription(String newsDescription) {
-        this.newsDescription = newsDescription;
+    public void setNewsDescription(String news_description) {
+        this.news_description = news_description;
     }
 
     public Date getPublishingDate() {
-        return publishingDate;
+        return publishing_date;
     }
 
-    public void setPublishingDate(Date publishingDate) {
-        this.publishingDate = publishingDate;
+    public void setPublishingDate(Date publishing_date) {
+        this.publishing_date = publishing_date;
     }
 
     @Override
     public String toString() {
         return "News{" +
-            "idNews=" + idNews +
+            "id_news=" + id_news +
             ", title='" + title + '\'' +
-            ", newsDescription='" + newsDescription + '\'' +
-            ", publishingDate=" + publishingDate +
+            ", news_description='" + news_description + '\'' +
+            ", publishing_date=" + publishing_date +
             '}';
     }
 }
-*/
+ */

@@ -4,11 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "proposition")
-public class Proposition {
+@Table(name = "proposition", schema = "contactcenter")
+public class Proposition implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idProposition;
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_proposition", nullable=false, updatable=false)
+    private int id_proposition;
 
     @NotNull
     @Column(name = "text")
@@ -18,7 +19,7 @@ public class Proposition {
     private int count;
 
     @ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name = "idSurvey", nullable = false)
+    @JoinColumn(name = "id_survey", nullable = false)
     private Survey survey;
 
 
@@ -29,12 +30,12 @@ public class Proposition {
         this.count = count;
     }
 
-    public Long getIdProposition() {
-        return idProposition;
+    public int getIdProposition() {
+        return id_proposition;
     }
 
-    public void setIdProposition(Long idProposition) {
-        this.idProposition = idProposition;
+    public void setIdProposition(int id_proposition) {
+        this.id_proposition = id_proposition;
     }
 
     public String getText() {
@@ -56,7 +57,7 @@ public class Proposition {
     @Override
     public String toString() {
         return "Proposition{" +
-            "idProposition=" + idProposition +
+            "id_proposition=" + id_proposition +
             ", text='" + text + '\'' +
             ", count=" + count +
             '}';

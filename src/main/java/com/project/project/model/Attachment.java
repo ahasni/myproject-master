@@ -6,14 +6,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "attachment")
-public class Attachment {
+@Table(name = "attachment", schema = "contactcenter")
+public class Attachment implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idAttachment;
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_attachment", nullable=false, updatable=false)
+    private int id_attachment;
     @NotNull
-    @Column(name = "attachmenturl")
-    private String attachmentURL;
+    @Column(name = "attachment_url")
+    private String attachment_url;
 
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -27,27 +28,27 @@ public class Attachment {
 
     protected Attachment(){}
 
-    public Attachment(@NotNull String attachmentURL) {
-        this.attachmentURL = attachmentURL;
+    public Attachment(@NotNull String attachment_url) {
+        this.attachment_url = attachment_url;
     }
 
-    public Long getIdAttachment() {
-        return idAttachment;
+    public int getIdAttachment() {
+        return id_attachment;
     }
 
-    public String getAttachmentURL() {
-        return attachmentURL;
+    public String getAttachmentUrl() {
+        return attachment_url;
     }
 
-    public void setAttachmentURL(String attachmentURL) {
-        this.attachmentURL = attachmentURL;
+    public void setAttachmentUrl(String attachment_url) {
+        this.attachment_url = attachment_url;
     }
 
     @Override
     public String toString() {
         return "Attachment{" +
-            "idAttachment=" + idAttachment +
-            ", attachmentURL='" + attachmentURL + '\'' +
+            "id_attachment=" + id_attachment +
+            ", attachment_url='" + attachment_url + '\'' +
             '}';
     }
 }

@@ -8,25 +8,26 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "survey")
-public class Survey {
+@Table(name = "survey", schema = "contactcenter")
+public class Survey  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idSurvey;
+     @Column(name="id_survey", nullable=false, updatable=false)
+    private int id_survey;
 
     @NotNull
-    @Column(name = "creationdate")
-    private Date creationDate;
+    @Column(name = "creation_date")
+    private Date creation_date;
     @NotNull
-    @Column(name = "closingdate")
-    private Date closingDate;
+    @Column(name = "closing_date")
+    private Date closing_date;
     @NotNull
     @Column(name = "question")
     @Size(max = 300)
     private String question;
 
     @OneToMany(fetch = FetchType.LAZY )
-    @JoinColumn(name = "idUser", nullable = false)
+    @JoinColumn(name = "id_user", nullable = false)
     private  Admin admin;
 
 
@@ -37,34 +38,34 @@ public class Survey {
 
     protected Survey () {}
 
-    public Survey(Date creationDate, Date closingDate, String question) {
-        this.creationDate = creationDate;
-        this.closingDate = closingDate;
+    public Survey(Date creation_date, Date closing_date, String question) {
+        this.creation_date = creation_date;
+        this.closing_date = closing_date;
         this.question = question;
     }
 
-    public Long getIdSurvey() {
-        return idSurvey;
+    public int getIdSurvey() {
+        return id_survey;
     }
 
-    public void setIdSurvey(Long idSurvey) {
-        this.idSurvey = idSurvey;
+    public void setIdSurvey(int id_survey) {
+        this.id_survey = id_survey;
     }
 
     public Date getCreationDate() {
-        return creationDate;
+        return creation_date;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationDate(Date creation_date) {
+        this.creation_date = creation_date;
     }
 
     public Date getClosingDate() {
-        return closingDate;
+        return closing_date;
     }
 
-    public void setClosingDate(Date closingDate) {
-        this.closingDate = closingDate;
+    public void setClosingDate(Date closing_date) {
+        this.closing_date = closing_date;
     }
 
     public String getQuestion() {
@@ -78,9 +79,9 @@ public class Survey {
     @Override
     public String toString() {
         return "Survey{" +
-            "idSurvey=" + idSurvey +
-            ", creationDate=" + creationDate +
-            ", closingDate=" + closingDate +
+            "id_survey=" + id_survey +
+            ", creation_date=" + creation_date +
+            ", closing_date=" + closing_date +
             ", question='" + question + '\'' +
             '}';
     }

@@ -8,14 +8,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "response")
-public class Response {
+@Table(name = "response", schema = "contactcenter")
+public class Response implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idResponse;
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_response", nullable=false, updatable=false)
+    private int id_response;
     @NotNull
-    @Column(name = "responseDate")
-    private Date responseDate;
+    @Column(name = "response_date")
+    private Date response_date;
     @Column(name = "message")
     private String message;
 
@@ -27,22 +28,22 @@ public class Response {
     }
 
     public Long getIdResponse() {
-        return idResponse;
+        return id_response;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage (String attachmentURL) {
+    public void setMessage (String attachment_url) {
         this.message = message;
     }
 
     @Override
     public String toString() {
         return "Attachment{" +
-                "idResponse=" + idResponse +
-                ", responseDate='" + responseDate + '\'' +
+                "id_response=" + id_response +
+                ", response_date='" + response_date + '\'' +
                 ", message='" + message + '\'' +
                 '}';
     }

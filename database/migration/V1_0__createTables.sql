@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS TYPE_ROLE
 (
-    id_role integer NOT NULL,
-    roleName character varying,
+    id_role SERIAL,
+    role_name character varying,
     CONSTRAINT id_role PRIMARY KEY (id_role)
 );
 
@@ -10,17 +10,17 @@ ALTER TABLE TYPE_ROLE OWNER to postgres;
 
 /*CREATE TABLE IF NOT EXISTS USER
 (
-    idUser integer NOT NULL,
-    firstName text NOT NULL,
-    lastName text NOT NULL,
+    id_user integer NOT NULL,
+    first_name text NOT NULL,
+    last_name text NOT NULL,
     email text NOT NULL,
     password character varying NOT NULL,
     address text NOT NULL,
-    phoneNumber integer NOT NULL,
+    phone_number integer NOT NULL,
     photo text NOT NULL,
     gender text NOT NULL,
-    id_role integer,
-    CONSTRAINT "user_pkey" PRIMARY KEY (idUser),
+    idRole integer,
+    CONSTRAINT "user_pkey" PRIMARY KEY (id_user),
     CONSTRAINT "fk_role" FOREIGN KEY (id_role)
         REFERENCES TYPE_ROLE (id_role) MATCH SIMPLE
         ON UPDATE CASCADE
@@ -30,13 +30,13 @@ ALTER TABLE TYPE_ROLE OWNER to postgres;
 ALTER TABLE USER OWNER to postgres;
 
 
-CREATE TABLE IF NOT EXISTS "Admin"
+/*CREATE TABLE IF NOT EXISTS "Admin"
 (
-    "idAdmin" integer NOT NULL,
-    "idUser" integer NOT NULL,
-    CONSTRAINT "idAdmin" PRIMARY KEY ("idAdmin"),
-    CONSTRAINT pk_user1 FOREIGN KEY ("idUser")
-        REFERENCES "USER" ("idUser") MATCH SIMPLE
+    "id_admin" integer NOT NULL,
+    "id_user" integer NOT NULL,
+    CONSTRAINT "id_admin" PRIMARY KEY ("id_admin"),
+    CONSTRAINT pk_user1 FOREIGN KEY ("id_user")
+        REFERENCES "USER" ("id_user") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -46,22 +46,22 @@ ALTER TABLE "Admin" OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS "Attachment"
 (
-    "idAttachment" integer NOT NULL,
-    "attachmentUrl" text NOT NULL,
-    CONSTRAINT "Attachment_pkey" PRIMARY KEY ("idAttachment")
+    "id_attachment" integer NOT NULL,
+    "attachment_url" text NOT NULL,
+    CONSTRAINT "Attachment_pkey" PRIMARY KEY ("id_attachment")
 );
 
 ALTER TABLE "Attachment" OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS "Document"
 (
-    "idDocument" integer NOT NULL,
-    "documentUrl" text NOT NULL,
-    "documentType" text NOT NULL,
-    "idUser" integer NOT NULL,
-    CONSTRAINT "Document_pkey" PRIMARY KEY ("idDocument"),
-    CONSTRAINT pk_user2 FOREIGN KEY ("idUser")
-        REFERENCES "User" ("idUser") MATCH SIMPLE
+    "id_document" integer NOT NULL,
+    "document_url" text NOT NULL,
+    "document_type" text NOT NULL,
+    "id_user" integer NOT NULL,
+    CONSTRAINT "Document_pkey" PRIMARY KEY ("id_document"),
+    CONSTRAINT pk_user2 FOREIGN KEY ("id_user")
+        REFERENCES "User" ("id_user") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -72,12 +72,12 @@ ALTER TABLE "Document" OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS "Response"
 (
-    "idResponse" integer NOT NULL,
-    "responseDate" date NOT NULL,
+    "id_response" integer NOT NULL,
+    "response_date" date NOT NULL,
     message text NOT NULL,
-    "idFeedback" integer NOT NULL,
-    "idRequest" integer NOT NULL,
-    CONSTRAINT "Response_pkey" PRIMARY KEY ("idResponse")
+    "id_feedback" integer NOT NULL,
+    "id_request" integer NOT NULL,
+    CONSTRAINT "Response_pkey" PRIMARY KEY ("id_response")
 );
 
 ALTER TABLE "Response" OWNER to postgres;
@@ -85,19 +85,19 @@ ALTER TABLE "Response" OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS "Feedback"
 (
-    "idFeedback" integer NOT NULL,
-    "feedbackObject" text NOT NULL,
-    "feedbackDescription" text NOT NULL,
-    "feedbackDate" date NOT NULL,
-    "idUser" integer,
-    "idResponse" integer NOT NULL,
-    CONSTRAINT "Feedback_pkey" PRIMARY KEY ("idFeedback"),
-    CONSTRAINT pk_user FOREIGN KEY ("idUser")
-        REFERENCES "User" ("idUser") MATCH SIMPLE
+    "id_feedback" integer NOT NULL,
+    "feedback_object" text NOT NULL,
+    "feedback_description" text NOT NULL,
+    "feedback_date" date NOT NULL,
+    "id_user" integer,
+    "id_response" integer NOT NULL,
+    CONSTRAINT "Feedback_pkey" PRIMARY KEY ("id_feedback"),
+    CONSTRAINT pk_user FOREIGN KEY ("id_user")
+        REFERENCES "User" ("id_user") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT pv_resp FOREIGN KEY ("idResponse")
-        REFERENCES "Response" ("idResponse") MATCH SIMPLE
+    CONSTRAINT pv_resp FOREIGN KEY ("id_response")
+        REFERENCES "Response" ("id_response") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -108,19 +108,19 @@ ALTER TABLE "Feedback" OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS "News"
 (
-    "idNews" integer NOT NULL,
-    "newsTitle" text,
-    "newsDescription" text,
-    "publishingDate" date,
-    "idAttachment" integer NOT NULL,
-    "idAdmin" integer,
-    CONSTRAINT "News_pkey" PRIMARY KEY ("idNews"),
-    CONSTRAINT pk_admin FOREIGN KEY ("idAdmin")
-        REFERENCES "Admin" ("idAdmin") MATCH SIMPLE
+    "id_news" integer NOT NULL,
+    "news_title" text,
+    "news_description" text,
+    "publishing_date" date,
+    "id_attachment" integer NOT NULL,
+    "id_admin" integer,
+    CONSTRAINT "News_pkey" PRIMARY KEY ("id_news"),
+    CONSTRAINT pk_admin FOREIGN KEY ("id_admin")
+        REFERENCES "Admin" ("id_admin") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
-    CONSTRAINT pk_attachment FOREIGN KEY ("idAttachment")
-        REFERENCES "Attachment" ("idAttachment") MATCH SIMPLE
+    CONSTRAINT pk_attachment FOREIGN KEY ("id_attachment")
+        REFERENCES "Attachment" ("id_attachment") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -130,14 +130,14 @@ ALTER TABLE "News" OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS "Survey"
 (
-    "idSurvey" integer NOT NULL,
-    creationdate date NOT NULL,
-    closingdate date NOT NULL,
+    "id_survey" integer NOT NULL,
+    creation_date date NOT NULL,
+    closing_date date NOT NULL,
     question text NOT NULL,
-    "idAdmin" integer NOT NULL,
-    CONSTRAINT "idSurvey" PRIMARY KEY ("idSurvey"),
-    CONSTRAINT pk_admin FOREIGN KEY ("idAdmin")
-        REFERENCES "Admin" ("idAdmin") MATCH SIMPLE
+    "id_admin" integer NOT NULL,
+    CONSTRAINT "idSurvey" PRIMARY KEY ("id_survey"),
+    CONSTRAINT pk_admin FOREIGN KEY ("id_admin")
+        REFERENCES "Admin" ("id_admin") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -150,10 +150,10 @@ CREATE TABLE IF NOT EXISTS "Proposition"
     "idProposition" integer NOT NULL,
     text text NOT NULL,
     count integer NOT NULL,
-    "idSurvey" integer NOT NULL,
-    CONSTRAINT "Proposition_pkey" PRIMARY KEY ("idProposition"),
-    CONSTRAINT pk_survey FOREIGN KEY ("idSurvey")
-        REFERENCES "Survey" ("idSurvey") MATCH SIMPLE
+    "id_survey" integer NOT NULL,
+    CONSTRAINT "Proposition_pkey" PRIMARY KEY ("id_proposition"),
+    CONSTRAINT pk_survey FOREIGN KEY ("id_survey")
+        REFERENCES "Survey" ("id_survey") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
@@ -164,19 +164,19 @@ ALTER TABLE "Proposition" OWNER to postgres;
 
 CREATE TABLE IF NOT EXISTS "Request"
 (
-    "idRequest" integer NOT NULL,
-    "startDate" date NOT NULL,
-    "finishDate" date NOT NULL,
-    "requestObject" text NOT NULL,
+    "id_request" integer NOT NULL,
+    "start_date" date NOT NULL,
+    "finish_date" date NOT NULL,
+    "request_object" text NOT NULL,
     id_attachment integer NOT NULL,
-    "idResponse" integer,
-    CONSTRAINT "Request_pkey" PRIMARY KEY ("idRequest"),
+    "id_response" integer,
+    CONSTRAINT "Request_pkey" PRIMARY KEY ("id_request"),
     CONSTRAINT pk_attachment1 FOREIGN KEY (id_attachment)
-        REFERENCES "Attachment" ("idAttachment") MATCH SIMPLE
+        REFERENCES "Attachment" ("id_attachment") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE,
     CONSTRAINT pk_response FOREIGN KEY ("idResponse")
-        REFERENCES "Response" ("idResponse") MATCH SIMPLE
+        REFERENCES "Response" ("id_response") MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );

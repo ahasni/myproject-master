@@ -24,9 +24,8 @@ public class RoleController {
         return (Set<Type_Role>) roleRepository.findAll();
     }
 
-    @PostMapping("/roles")
-    public Type_Role createPost(@Valid @RequestParam Map<String, String> body) {
-        Type_Role role = new Type_Role(body["roleName"]);
+    @PostMapping(value = "/roles", consumes =  "application/json", produces = "application/json")
+    public Type_Role createPost(@Valid @RequestBody Type_Role role) {
         return roleRepository.save(role);
     }
 

@@ -3,25 +3,25 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name = "User", schema = "contactcenter")
+public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idUser;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_user", nullable=false, updatable=false)
+    private int id_user;
 
     @NotNull
     @Size(max = 65)
-    @Column(name = "firstname")
-    private String firstName;
+    @Column(name = "first_name")
+    private String first_name;
 
     @NotNull
     @Size(max = 65)
-    @Column(name = "lastname")
-    private String lastName;
+    @Column(name = "last_name")
+    private String last_name;
 
     @NotNull
     @Email
@@ -41,8 +41,8 @@ public class User {
 
     @NotNull
     @Size(max = 15)
-    @Column(name = "phonenumber")
-    private Long phoneNumber;
+    @Column(name = "phone_number")
+    private Long phone_number;
 
     @NotNull
     @Column(name = "photo")
@@ -54,10 +54,11 @@ public class User {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
-        name="idRole",
-        referencedColumnName = "idRole",
+        name="id_role",
+        referencedColumnName = "id_role",
         insertable = false,
         updatable = false)
+
     private Type_Role type_role;
 
     /*@OneToMany(cascade = CascadeType.ALL,
@@ -75,41 +76,41 @@ public class User {
             mappedBy = "Document")
     private Set<Document> stattt = new HashSet<>();*/
 
-    public User(Long idUser, Gender gender, Long phoneNumber, String photo, String password, String email, String firstName, String lastName, String address) {}
+    public User(Long id_user, Gender gender, Long phone_number, String photo, String password, String email, String first_name, String last_name, String address) {}
 
-    public User(@NotNull @Size(max = 65) String firstName, @NotNull @Size(max = 65) String lastName, @NotNull @Email @Size(max = 50) String email, @NotNull @Size(max = 25) String password, @NotNull @Size(max = 125) String address, @NotNull @Size(max = 15) Long phoneNumber, @NotNull String photo, Gender gender) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(@NotNull @Size(max = 65) String first_name, @NotNull @Size(max = 65) String last_name, @NotNull @Email @Size(max = 50) String email, @NotNull @Size(max = 25) String password, @NotNull @Size(max = 125) String address, @NotNull @Size(max = 15) Long phone_number, @NotNull String photo, Gender gender) {
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phone_number;
         this.photo = photo;
         this.gender = gender;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public int getIdUser() {
+        return id_user;
     }
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
+    public void setIdUser(int id_user) {
+        this.id_user = id_user;
     }
 
     public String getFirstName() {
-        return firstName;
+        return first_name;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.first_name = firstName;
     }
 
     public String getLastName() {
-        return lastName;
+        return last_name;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.last_name = lastName;
     }
 
     public String getEmail() {
@@ -137,11 +138,11 @@ public class User {
     }
 
     public Long getPhoneNumber() {
-        return phoneNumber;
+        return phone_number;
     }
 
     public void setPhoneNumber(Long phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        this.phone_number = phone_number;
     }
 
     public String getPhoto() {
@@ -163,13 +164,13 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-            "idUser=" + idUser +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
+            "id_user=" + id_user +
+            ", first_name='" + first_name + '\'' +
+            ", last_name='" + last_name + '\'' +
             ", email='" + email + '\'' +
             ", password='" + password + '\'' +
             ", address='" + address + '\'' +
-            ", phoneNumber=" + phoneNumber +
+            ", phone_number=" + phone_number +
             ", photo='" + photo + '\'' +
             ", gender='" + gender + '\'' +
             '}';

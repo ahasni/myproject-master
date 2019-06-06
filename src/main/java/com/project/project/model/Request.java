@@ -8,79 +8,80 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "request")
-public class Request {
+@Table(name = "request", schema = "contactcenter")
+public class Request implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idRequest;
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id_request", nullable=false, updatable=false)
+    private int id_request;
     @NotNull
-    @Column(name = "requestobject")
+    @Column(name = "request_object")
     @Size(max = 200)
-    private String requestObject;
+    private String request_object;
     @NotNull
-    @Column(name = "startdate")
+    @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyy")
-    private Date startDate;
+    private Date start_date;
     @NotNull
-    @Column(name = "finishdate")
+    @Column(name = "finish_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd-MM-yyy")
-    private Date finishDate;
+    private Date finish_date;
 
     @OneToMany(fetch = FetchType.LAZY,orphanRemoval = true)
-    @JoinColumn(name = "idAttachment", nullable = false)
+    @JoinColumn(name = "id_attachment", nullable = false)
     private Attachment attachment;
     protected Request () {}
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idResponse", nullable = false)
+    @JoinColumn(name = "id_response", nullable = false)
     private Response response;
 
-    public Request(String requestObject, Date startDate, Date finishDate) {
-        this.requestObject = requestObject;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
+    public Request(String request_object, Date start_date, Date finish_date) {
+        this.request_object = request_object;
+        this.start_date = start_date;
+        this.finish_date = finish_date;
     }
 
-    public Long getIdRequest() {
-        return idRequest;
+    public int getIdRequest() {
+        return id_request;
     }
 
-    public void setIdRequest(Long idRequest) {
-        this.idRequest = idRequest;
+    public void setIdRequest(int id_request) {
+        this.id_request = id_request;
     }
 
     public String getRequestObject() {
-        return requestObject;
+        return request_object;
     }
 
-    public void setRequestObject(String requestObject) {
-        this.requestObject = requestObject;
+    public void setRequestObject(String request_object) {
+        this.request_object = request_object;
     }
 
     public Date getStartDate() {
-        return startDate;
+        return start_date;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setStartDate(Date start_date) {
+        this.start_date = start_date;
     }
 
     public Date getFinishDate() {
-        return finishDate;
+        return finish_date;
     }
 
-    public void setFinishDate(Date finishDate) {
-        this.finishDate = finishDate;
+    public void setFinishDate(Date finish_date) {
+        this.finish_date = finish_date;
     }
 
     @Override
     public String toString() {
         return "Request{" +
-            "idRequest=" + idRequest +
-            ", requestObject='" + requestObject + '\'' +
-            ", startDate=" + startDate +
-            ", finishDate=" + finishDate +
+            "id_request=" + id_request +
+            ", request_object='" + request_object + '\'' +
+            ", start_date=" + start_date +
+            ", finish_date=" + finish_date +
             '}';
     }
 }
