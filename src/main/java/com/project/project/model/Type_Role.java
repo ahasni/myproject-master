@@ -3,6 +3,8 @@ package com.project.project.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Type_Role implements Serializable {
@@ -15,16 +17,18 @@ public class Type_Role implements Serializable {
     @Column(name = "role_name")
     private String role_name;
 
-    protected Type_Role() {}
-/*
+    protected Type_Role() {
+
+    }
+
     @OneToMany(
         targetEntity=User.class,
         cascade = CascadeType.ALL,
         fetch = FetchType.LAZY,
         mappedBy = "type_role")
-    private Set<User> users = new HashSet<>();*/
+    private Set<User> users = new HashSet<>();
 
-    public Type_Role(String roleName){
+    public Type_Role(String role_name){
         this.role_name = role_name;
     }
 
@@ -44,14 +48,14 @@ public class Type_Role implements Serializable {
         this.role_name = role_name;
     }
 
-    /*
+
     public Set<User> getUsersForRole() {
         return users;
     }
 
     public void setUsersForRole(Set<User> users) {
         this.users = users;
-    }*/
+    }
 
     @Override
     public String toString() {

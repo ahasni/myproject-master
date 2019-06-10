@@ -8,9 +8,9 @@ CREATE TABLE IF NOT EXISTS TYPE_ROLE
 ALTER TABLE TYPE_ROLE OWNER to postgres;
 
 
-/*CREATE TABLE IF NOT EXISTS USER
+CREATE TABLE IF NOT EXISTS USERS
 (
-    id_user integer NOT NULL,
+    id_user SERIAL,
     first_name text NOT NULL,
     last_name text NOT NULL,
     email text NOT NULL,
@@ -19,31 +19,31 @@ ALTER TABLE TYPE_ROLE OWNER to postgres;
     phone_number integer NOT NULL,
     photo text NOT NULL,
     gender text NOT NULL,
-    idRole integer,
-    CONSTRAINT "user_pkey" PRIMARY KEY (id_user),
-    CONSTRAINT "fk_role" FOREIGN KEY (id_role)
+    id_role integer,
+    CONSTRAINT "id_user" PRIMARY KEY (id_user),
+    CONSTRAINT "fk_id_role" FOREIGN KEY (id_role)
         REFERENCES TYPE_ROLE (id_role) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-ALTER TABLE USER OWNER to postgres;
+ALTER TABLE USERS OWNER to postgres;
 
 
-/*CREATE TABLE IF NOT EXISTS "Admin"
+CREATE TABLE IF NOT EXISTS ADMIN
 (
-    "id_admin" integer NOT NULL,
-    "id_user" integer NOT NULL,
-    CONSTRAINT "id_admin" PRIMARY KEY ("id_admin"),
-    CONSTRAINT pk_user1 FOREIGN KEY ("id_user")
-        REFERENCES "USER" ("id_user") MATCH SIMPLE
+    id_admin SERIAL,
+    id_user long NOT NULL,
+    CONSTRAINT "id_admin" PRIMARY KEY (id_admin),
+    CONSTRAINT "fk_id_admin_user" FOREIGN KEY (id_user)
+        REFERENCES USERS (id_user) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
 );
 
-ALTER TABLE "Admin" OWNER to postgres;
+ALTER TABLE ADMIN OWNER to postgres;
 
-
+/*
 CREATE TABLE IF NOT EXISTS "Attachment"
 (
     "id_attachment" integer NOT NULL,

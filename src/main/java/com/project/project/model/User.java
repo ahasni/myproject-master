@@ -2,11 +2,11 @@ package com.project.project.model;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @Entity
-@Table(name = "User", schema = "contactcenter")
+@Table(name = "USERS", schema = "contactcenter")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,33 +14,27 @@ public class User implements Serializable {
     private int id_user;
 
     @NotNull
-    @Size(max = 65)
     @Column(name = "first_name")
     private String first_name;
 
     @NotNull
-    @Size(max = 65)
     @Column(name = "last_name")
     private String last_name;
 
     @NotNull
     @Email
-    @Size(max = 50)
     @Column(name = "email")
     private String email;
 
     @NotNull
-    @Size(max = 25)
     @Column(name = "password")
     private String password;
 
     @NotNull
-    @Size(max = 125)
     @Column(name = "address")
     private String address;
 
     @NotNull
-    @Size(max = 15)
     @Column(name = "phone_number")
     private Long phone_number;
 
@@ -61,11 +55,11 @@ public class User implements Serializable {
 
     private Type_Role type_role;
 
-    /*@OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "Admin")
-    private Set<Admin> statt = new HashSet<>();
-
+    private ArrayList<Admin> statt = new ArrayList<>();
+/*
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "Feedback")
@@ -76,9 +70,10 @@ public class User implements Serializable {
             mappedBy = "Document")
     private Set<Document> stattt = new HashSet<>();*/
 
-    public User(Long id_user, Gender gender, Long phone_number, String photo, String password, String email, String first_name, String last_name, String address) {}
+    public User() {
+    }
 
-    public User(@NotNull @Size(max = 65) String first_name, @NotNull @Size(max = 65) String last_name, @NotNull @Email @Size(max = 50) String email, @NotNull @Size(max = 25) String password, @NotNull @Size(max = 125) String address, @NotNull @Size(max = 15) Long phone_number, @NotNull String photo, Gender gender) {
+    public User(String first_name, String last_name, String email, String password, String address, Long phone_number, String photo, Gender gender) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
@@ -89,28 +84,28 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public int getIdUser() {
+    public int getId_user() {
         return id_user;
     }
 
-    public void setIdUser(int id_user) {
+    public void setId_user(int id_user) {
         this.id_user = id_user;
     }
 
-    public String getFirstName() {
+    public String getFirst_name() {
         return first_name;
     }
 
-    public void setFirstName(String firstName) {
-        this.first_name = firstName;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
 
-    public String getLastName() {
+    public String getLast_name() {
         return last_name;
     }
 
-    public void setLastName(String lastName) {
-        this.last_name = lastName;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getEmail() {
@@ -137,11 +132,11 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public Long getPhoneNumber() {
+    public Long getPhone_number() {
         return phone_number;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public void setPhone_number(Long phone_number) {
         this.phone_number = phone_number;
     }
 

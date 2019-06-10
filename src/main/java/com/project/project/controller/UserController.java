@@ -1,17 +1,21 @@
 package com.project.project.controller;
 
+import com.project.project.model.Type_Role;
 import com.project.project.model.User;
 import com.project.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class UserController {
@@ -20,37 +24,37 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public List <User> getAllUsers(){
-        return (List<User>) userRepository.findAll();
+    public Set<User> getAllUsers() {
+        return (Set<User>) userRepository.findAll();
     }
 
-    /*@GetMapping("/user/{idUser}")
-    public User getUser (@PathVariable long idUser) {
-        Optional<User> user = userRepository.findById(idUser);
-        return user.get();
-    }
-    @DeleteMapping("/user/{idUser}")
-    public void deleteUser(@PathVariable long idUser){
-        userRepository.deleteById(idUser);
-    }
-    @PostMapping("/user/create")
-    public User createUser (@RequestBody User user){
-     User _user = userRepository.save(new User(user.getIdUser(),user.getGender(),user.getPhoneNumber(),
-         user.getPhoto(),user.getPassword(),user.getEmail(),user.getFirstName(),user.getLastName(),user.getAddress()));
-      return _user;
+    @DeleteMapping("/users/{id_user}")
+    public void deleteUser(@PathVariable long id_user){
+        userRepository.deleteById(id_user);
     }
 
-    @PutMapping("/user/{idUser}")
-        public ResponseEntity<User> updateUser (@PathVariable("id") long idUser, @RequestBody User user) {
-        Optional<User> userData = userRepository.findById(idUser);
-        User _user = userData.get();
-        _user.setAddress(user.getAddress());
-        _user.setEmail(user.getEmail());
-        _user.setFirstName(user.getFirstName());
-        _user.setLastName(user.getLastName());
-        _user.setGender(user.getGender());
-        _user.setPassword(user.getPassword());
-        _user.setPhoto(user.getPhoto());
-        _user.setPhoneNumber(user.getPhoneNumber());
-        return new ResponseEntity<>(userRepository.save(_user), HttpStatus.OK);*/
+    @PostMapping(value = "/users", consumes =  "application/json", produces = "application/json")
+    public User createUser(@RequestBody User user) {
+        System.out.println("------------------");
+        System.out.println(user.toString());
+        return userRepository.save(user);
+    }
+
+
+    @PutMapping("/users/{id_user}")
+        public User updateUser (@PathVariable long id_user,@Valid  @RequestBody User postRequest) {
+        return userRepository.findById(id_user).map(user -> {
+            user.setFirst_name(postRequest.getFirst_name());
+            user.setLast_name(postRequest.getLast_name());
+            user.setEmail(postRequest.getEmail());
+            user.setPassword(postRequest.getPassword());
+            user.setAddress(postRequest.getAddress());
+            user.setPhone_number(postRequest.getPhone_number());
+            user.setPhoto(postRequest.getPhoto());
+            user.setGender(postRequest.getGender());
+            return userRepository.save(user);
+        }).orElseThrow(() -> new ResourceAccessException("id_user " + id_user + " not found"));
+    }
 }
+
+

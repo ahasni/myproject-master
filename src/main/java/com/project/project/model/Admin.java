@@ -1,24 +1,27 @@
-/*package com.project.project.model;
+package com.project.project.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
+import java.io.Serializable;
 
 
 @Entity
-@Table(name = "admin", schema = "contactcenter")
+@Table(name = "ADMINS", schema = "contactcenter")
 public class Admin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_admin", nullable=false, updatable=false)
-    private int id_admin;
+    public int id_admin;
     @NotNull
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_user", nullable = false)
+    @JoinColumn(
+            name="id_user",
+            referencedColumnName = "id_user",
+            insertable = false,
+            updatable = false)
     private User user;
-
+/*
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "Admin")
@@ -27,15 +30,15 @@ public class Admin implements Serializable {
             fetch = FetchType.LAZY,
             mappedBy = "Admin")
     private Set<News> staat = new HashSet<>();
-
+*/
     protected Admin(){}
 
 
     @Override
     public String toString() {
-        return "Attachment{" +
-                "id_attachment=" + id_admin +
+        return "Admin{" +
+                "id_admin=" + id_admin +
                 '}';
     }
 }
-*/
+
