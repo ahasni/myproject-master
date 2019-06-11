@@ -33,7 +33,7 @@ ALTER TABLE USERS OWNER to postgres;
 CREATE TABLE IF NOT EXISTS ADMIN
 (
     id_admin SERIAL,
-    id_user long NOT NULL,
+    id_user integer NOT NULL,
     CONSTRAINT "id_admin" PRIMARY KEY (id_admin),
     CONSTRAINT "fk_id_admin_user" FOREIGN KEY (id_user)
         REFERENCES USERS (id_user) MATCH SIMPLE

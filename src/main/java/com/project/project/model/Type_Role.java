@@ -40,11 +40,11 @@ public class Type_Role implements Serializable {
         this.id_role = id_role;
     }
 
-    public String getRoleName() {
+    public String getRole_name() {
         return role_name;
     }
 
-    public void setRoleName(String role_name) {
+    public void setRole_name(String role_name) {
         this.role_name = role_name;
     }
 

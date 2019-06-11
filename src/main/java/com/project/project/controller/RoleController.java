@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 
 @RestController
@@ -18,8 +18,8 @@ public class RoleController {
 
 
     @GetMapping("/roles")
-    public Set<Type_Role> getAllRoles() {
-        return (Set<Type_Role>) roleRepository.findAll();
+    public List<Type_Role> getAllRoles() {
+        return (List<Type_Role>) roleRepository.findAll();
     }
 
     @PostMapping(value = "/roles", consumes =  "application/json", produces = "application/json")
@@ -30,7 +30,7 @@ public class RoleController {
     @PutMapping("/roles/{roleId}")
     public Type_Role updatePost(@PathVariable Long roleId, @Valid @RequestBody Type_Role postRequest) {
         return roleRepository.findById(roleId).map(role -> {
-            role.setRoleName(postRequest.getRoleName());
+            role.setRole_name(postRequest.getRole_name());
             return roleRepository.save(role);
         }).orElseThrow(() -> new ResourceAccessException("RoleId " + roleId + " not found"));
     }

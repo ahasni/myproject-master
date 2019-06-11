@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "ADMINS", schema = "contactcenter")
+@Table(name = "admin", schema = "contactcenter")
 public class Admin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

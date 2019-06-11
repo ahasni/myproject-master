@@ -4,6 +4,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS", schema = "contactcenter")
@@ -55,10 +57,12 @@ public class User implements Serializable {
 
     private Type_Role type_role;
 
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(
+            targetEntity=Admin.class,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
-            mappedBy = "Admin")
-    private ArrayList<Admin> statt = new ArrayList<>();
+            mappedBy = "user")
+    private Set<Admin> admins = new HashSet<Admin>();
 /*
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
@@ -154,6 +158,14 @@ public class User implements Serializable {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public Set<Admin> getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(Set<Admin> admins) {
+        this.admins = admins;
     }
 
     @Override

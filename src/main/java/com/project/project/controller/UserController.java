@@ -12,10 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @RestController
 public class UserController {
@@ -24,8 +21,8 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/users")
-    public Set<User> getAllUsers() {
-        return (Set<User>) userRepository.findAll();
+    public List<User> getAllUsers() {
+        return (List<User>) userRepository.findAll();
     }
 
     @DeleteMapping("/users/{id_user}")
@@ -35,8 +32,6 @@ public class UserController {
 
     @PostMapping(value = "/users", consumes =  "application/json", produces = "application/json")
     public User createUser(@RequestBody User user) {
-        System.out.println("------------------");
-        System.out.println(user.toString());
         return userRepository.save(user);
     }
 

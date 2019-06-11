@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 
 @RestController
@@ -18,8 +18,8 @@ public class AdminController {
 
 
     @GetMapping("/admins")
-    public Set<Admin> getAllAdmins() {
-        return (Set<Admin>) adminRepository.findAll();
+    public List<Admin> getAllAdmins() {
+        return (List<Admin>) adminRepository.findAll();
     }
 
     @PostMapping(value = "/admins", consumes =  "application/json", produces = "application/json")
