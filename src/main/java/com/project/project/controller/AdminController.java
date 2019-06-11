@@ -23,7 +23,7 @@ public class AdminController {
     }
 
     @PostMapping(value = "/admins", consumes =  "application/json", produces = "application/json")
-    public Admin createPost(@Valid @RequestBody Admin admin) {
+    public Admin creatPost (@Valid @RequestBody Admin admin) {
         return adminRepository.save(admin);
     }
 
