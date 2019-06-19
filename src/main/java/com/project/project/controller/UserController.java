@@ -20,24 +20,28 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+	@CrossOrigin()
     @GetMapping("/users")
     public List<User> getAllUsers() {
         return (List<User>) userRepository.findAll();
     }
 
+	@CrossOrigin()
     @DeleteMapping("/users/{id_user}")
     public void deleteUser(@PathVariable long id_user){
         userRepository.deleteById(id_user);
     }
 
+	@CrossOrigin()
     @PostMapping(value = "/users", consumes =  "application/json", produces = "application/json")
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
 
-
+	@CrossOrigin()
     @PutMapping("/users/{id_user}")
-        public User updateUser (@PathVariable long id_user,@Valid  @RequestBody User postRequest) {
+        public User updateUser (@PathVariable long
+		id_user,@Valid  @RequestBody User postRequest) {
         return userRepository.findById(id_user).map(user -> {
             user.setFirst_name(postRequest.getFirst_name());
             user.setLast_name(postRequest.getLast_name());
