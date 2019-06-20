@@ -16,28 +16,30 @@ public class RoleController {
     @Autowired
     private Type_RoleRepository roleRepository;
 
-
+    @CrossOrigin
     @GetMapping("/roles")
     public List<Type_Role> getAllRoles() {
         return (List<Type_Role>) roleRepository.findAll();
     }
 
+    @CrossOrigin
     @PostMapping(value = "/roles", consumes =  "application/json", produces = "application/json")
     public Type_Role createPost(@Valid @RequestBody Type_Role role) {
         return roleRepository.save(role);
     }
 
+    @CrossOrigin
     @PutMapping("/roles/{roleId}")
-    public Type_Role updatePost(@PathVariable Long roleId, @Valid @RequestBody Type_Role postRequest) {
+    public Type_Role updatePost(@PathVariable int roleId, @Valid @RequestBody Type_Role postRequest) {
         return roleRepository.findById(roleId).map(role -> {
             role.setRole_name(postRequest.getRole_name());
             return roleRepository.save(role);
         }).orElseThrow(() -> new ResourceAccessException("RoleId " + roleId + " not found"));
     }
 
-
+    @CrossOrigin
     @DeleteMapping("/roles/{roleId}")
-    public ResponseEntity<?> deletePost(@PathVariable Long roleId) {
+    public ResponseEntity<?> deletePost(@PathVariable int roleId) {
         return roleRepository.findById(roleId).map(post -> {
             roleRepository.delete(post);
             return ResponseEntity.ok().build();

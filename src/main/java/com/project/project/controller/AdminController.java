@@ -28,7 +28,7 @@ public class AdminController {
     }
 
     @PutMapping("/admins/{id_admin}")
-    public Admin updateAdmin (@PathVariable long id_admin,@Valid  @RequestBody Admin postRequest) {
+    public Admin updateAdmin (@PathVariable int id_admin,@Valid  @RequestBody Admin postRequest) {
         return adminRepository.findById(id_admin).map(admin -> {
             return adminRepository.save(admin);
         }).orElseThrow(() -> new ResourceAccessException("id_admin " + " not found"));
@@ -37,7 +37,7 @@ public class AdminController {
 
 
     @DeleteMapping("/admin/{admin_id}")
-    public ResponseEntity<?> deletPost(@PathVariable long admin_id) {
+    public ResponseEntity<?> deletPost(@PathVariable int admin_id) {
         return adminRepository.findById(admin_id).map(post -> {
             adminRepository.delete(post);
             return ResponseEntity.ok().build();

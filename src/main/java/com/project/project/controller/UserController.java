@@ -28,7 +28,7 @@ public class UserController {
 
 	@CrossOrigin()
     @DeleteMapping("/users/{id_user}")
-    public void deleteUser(@PathVariable long id_user){
+    public void deleteUser(@PathVariable int id_user){
         userRepository.deleteById(id_user);
     }
 
@@ -40,17 +40,17 @@ public class UserController {
 
 	@CrossOrigin()
     @PutMapping("/users/{id_user}")
-        public User updateUser (@PathVariable long
-		id_user,@Valid  @RequestBody User postRequest) {
+        public User updateUser (@PathVariable int id_user,@Valid  @RequestBody User putRequest) {
+
         return userRepository.findById(id_user).map(user -> {
-            user.setFirst_name(postRequest.getFirst_name());
-            user.setLast_name(postRequest.getLast_name());
-            user.setEmail(postRequest.getEmail());
-            user.setPassword(postRequest.getPassword());
-            user.setAddress(postRequest.getAddress());
-            user.setPhone_number(postRequest.getPhone_number());
-            user.setPhoto(postRequest.getPhoto());
-            user.setGender(postRequest.getGender());
+            user.setFirst_name(putRequest.getFirst_name());
+            user.setLast_name(putRequest.getLast_name());
+            user.setEmail(putRequest.getEmail());
+            user.setPassword(putRequest.getPassword());
+            user.setAddress(putRequest.getAddress());
+            user.setPhone_number(putRequest.getPhone_number());
+            user.setPhoto(putRequest.getPhoto());
+            user.setGender(putRequest.getGender());
             return userRepository.save(user);
         }).orElseThrow(() -> new ResourceAccessException("id_user " + id_user + " not found"));
     }
